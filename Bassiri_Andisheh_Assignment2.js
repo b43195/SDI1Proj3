@@ -1,8 +1,48 @@
 //Andisheh Bassiri
-//Jan 16th 2013
-//Project 2
-//Story - Making breakfast for my family.
+//SDI 1
+//Jan2013
+//Project3
+//Project 2 expanded  
 
+
+//Global Variables
+
+var drinkChoices = ["Orange Juice", "Coffee", "Carrot Juice", "Milk"]
+
+
+//Objects
+var familyMember = { 
+	name: "",
+	eggAppetite: "";
+	baconAppetite: "";
+
+};
+
+var breakfast = {
+	prepTime:
+	cookTime:  
+	totalReqIngredients:
+
+};
+
+
+//Functions
+var say = function(message){
+	console.log(message);
+};
+
+
+//Script
+
+var meaghan = new familyMember;
+
+say(familyMember);
+
+
+//JSON
+// Use Eggs, Bacon, OJ and Coffee  with package info (cook time, nutrional info )
+
+/*Project2Code
 //Variable Declaration
 
 var familyMembers = ["Meaghan" , "Omar" , "Andisheh"],
@@ -109,4 +149,5 @@ say("Time to plate the " + eggsCooked + " eggs and bacon so we can eat!");
 familyComments("taste awesome", "are num num nummy!")
 var moreEggsCooked = stillHungry([true, false, true],2);
 say("Mmm Thanks for Breakfast!");
+*/
 
