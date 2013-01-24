@@ -7,43 +7,66 @@
 
 //Global Variables
 
-var familyMembersOrder = ["Meaghan", "Omar", "Andisheh"]
-var drinkOrder = ["Orange Juice", "Coffee", "Carrot Juice", "Milk"];
+var familyEating = ["Meaghan", "Omar", "Andisheh"]
+var drinkOrder = ["Orange Juice", "Carrot Juice", "Milk"];
 var eggOrder = [2, 1, 3];
 var baconOrder = [3, 1, 2];
 var startBreakfast = 7;
 
+//Functions
+
 var say = function(message){
 	console.log(message);
-}
+};
 
-var familyMember = function(){ 
-	var numberEggsWillEat = function(){};
-	var numberBaconWillEat = function(){};
-	var willDrink = function(){};
-	say
+var familyMember = function(name){ 
+	var who = name;
+
 	return {
-		name: name,
-		eggs: eggOrder,
-
-
+		name: who,
+		eggs: 0,
+		bacon: 0,
+		drink: 0,
 	}
 };
 
-var breakfast = {
-	prepTime:
-	cookTime:  
-	totalReqIngredients:
+var takeOrder = function(){
+	for (n = 0; n < familyEating.length; n++){
+		if(n === 0 ){
+			meaghan.eggs = eggOrder[n];
+			meaghan.bacon = baconOrder[n];
+			meaghan.drink = drinkOrder[n];
+		}else if(n === 1){
+			omar.eggs = eggOrder[n];
+			omar.bacon = baconOrder[n];
+			omar.drink = drinkOrder[n];
+		}else if(n === 2){
+			andisheh.eggs = eggOrder[n];
+			andisheh.bacon = baconOrder[n];
+			andisheh.drink = drinkOrder[n];
+		}
+	}
+}
 
-};
-
-
-//Functions
 
 //Script
 
-var meaghan = familyMember(familyMembersOrder(0));
+var meaghan  = familyMember(familyEating[0]);
+var omar     = familyMember(familyEating[1]);
+var andisheh = familyMember(familyEating[2]);
+
+takeOrder();
+
+var familyReady = function(){
+	for (n = 0; n < familyEating.length; n++){
+	say(familyEating[n] + " is ready for breakfast");
+	};
+};
+
+familyReady();
 say(meaghan);
+say(omar);
+say(andisheh);
 
 
 
