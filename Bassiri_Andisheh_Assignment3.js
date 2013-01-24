@@ -13,6 +13,7 @@ var eggOrder = [2, 1, 3];
 var baconOrder = [3, 1, 2];
 var startBreakfast = 7;
 
+
 //Functions
 
 var say = function(message){
@@ -28,6 +29,27 @@ var familyMember = function(name){
 		bacon: 0,
 		drink: 0,
 	}
+};
+
+var famReady = function(famEating){
+	var  ready   = true,
+		notReady = false;
+
+	if(familyEating === 3){
+		return ready;
+	}else{
+		return notReady;
+	};
+};
+
+var readyRollCall = function(boolean){
+	if (boolean){
+		for (n = 0; n < familyEating.length; n++){
+		say(familyEating[n] + " is ready for breakfast");
+		}
+	} else {
+			say("Some one must be sleeping!")
+		}
 };
 
 var takeOrder = function(){
@@ -49,21 +71,18 @@ var takeOrder = function(){
 }
 
 
+
 //Script
 
 var meaghan  = familyMember(familyEating[0]);
 var omar     = familyMember(familyEating[1]);
 var andisheh = familyMember(familyEating[2]);
 
+
+say("Good Morning! It's time to make breakfast.  Is everyone awake and ready for breakfast?")
+var famstatus = readyRollCall(familyEating.length)
+readyRollCall(famstatus);
 takeOrder();
-
-var familyReady = function(){
-	for (n = 0; n < familyEating.length; n++){
-	say(familyEating[n] + " is ready for breakfast");
-	};
-};
-
-familyReady();
 say(meaghan);
 say(omar);
 say(andisheh);
@@ -72,6 +91,11 @@ say(andisheh);
 
 //JSON
 // Use Eggs, Bacon, OJ and Coffee  with package info (cook time, nutrional info )
+
+
+
+
+
 
 /*Project2Code
 //Variable Declaration
