@@ -27,8 +27,45 @@ var familyMember = function(name){
 		name: who,
 		eggs: 0,
 		bacon: 0,
-		drink: 0,
+		drink: "",
+		foodInBelly: 0,
+		foodInMouth: 0,
+
+		bite: function(){
+			this.foodInMouth += 1
+		},
+		chewSwallow: function(){
+			this.foodInMouth -= 1
+			this.foodInBelly += 1
+		},
+		fillBelly: function(){
+			var i = this.eggs + this.bacon ;
+			var i2 = this.foodInMouth;
+			while(i > 0){
+				this.bite();
+				while(i2 > 0){
+					this.chewSwallow();
+					say("chew");
+				}
+				i--;
+			}
+		},
+
 	}
+};
+
+var oven = {
+	working: true,
+	knob: {
+		style : "Rotary",
+		color: "black",
+		settings: ["Bake", "Convection Bake", "Broil"],
+	},
+	getCookSettings: function(){
+		var ovenInfo = [];
+		ovenInfo.push = this.knob.settings;
+		return ovenInfo;
+	},
 };
 
 var famReady = function(famEating){
@@ -44,8 +81,10 @@ var famReady = function(famEating){
 
 var readyRollCall = function(boolean){
 	if (boolean){
-		for (n = 0; n < familyEating.length; n++){
-		say(familyEating[n] + " is ready for breakfast");
+		var i = 0
+		while (i < familyEating.length){
+		say(familyEating[i] + " is ready for breakfast");
+		i++
 		}
 	} else {
 			say("Some one must be sleeping!")
@@ -107,35 +146,47 @@ var ingredientsNeeded = function(numberEggs, numberBacon, eggsNeeded, baconNeede
 		}else{
 		enoughBacon = false;
 		};
-	if(enoughEgg && enoughBacon){
-		say("We have " + numberEggs + " eggs and have " + numberBacon + " strips of bacon, so we have everything we need!");
-		ingredientsReady = true;
-	}else {
-		say("We have " + numberEggs + " eggs and have " + numberBacon + " strips of bacon, so We'll need to make a trip to the store...");
-		ingredientsReady = false;
+	if(enoughEgg && enoughBacon){		
+		ingredientsReady = "We have plenty of eggs and bacon to make breakfast.";
+	}else {		
+		ingredientsReady = "Looks like we don't have enough to make breakfast";
 	};
 	return ingredientsReady;
 };
 
-
 //Script
 
-var meaghan  = familyMember(familyEating[0]);
-var omar     = familyMember(familyEating[1]);
-var andisheh = familyMember(familyEating[2]);
+var meaghan  = familyMember(familyEating[0]); //return object, local var
+var omar     = familyMember(familyEating[1]); //return object, local var
+var andisheh = familyMember(familyEating[2]); //return object, local var
+
+say("Good Morning! Is everyone awake and ready for breakfast?")//string arg
+
+var famstatus = famReady(familyEating); //array arg, boolean return, conditional, local var
+readyRollCall(famstatus); //boolean argument, conditional, for loop (nested?)
 
 
-say("Good Morning! It's time to make breakfast.  Is everyone awake and ready for breakfast?")
-var famstatus = famReady(familyEating)
-readyRollCall(famstatus);
-say("Let's take everyones order");
-takeOrder();
-var eggsNeeded = eggsordered(meaghan,omar,andisheh);
-var baconNeeded = baconOrdered(meaghan,omar,andisheh);
+
+say("Let's take everyone's order"); //string arg
+
+takeOrder(); //for loop, nested conditional?,
+var eggsNeeded = eggsordered(meaghan,omar,andisheh); //object arg, math, local var
+var baconNeeded = baconOrdered(meaghan,omar,andisheh);  //object arg, math, local var
+
 say("We need " + eggsNeeded + " eggs and " + baconNeeded + " strips of bacon");
-var ingredientsReady = ingredientsNeeded(2,1,eggsNeeded,baconNeeded)
+
+var ingredientsReady = ingredientsNeeded(12 ,20 ,eggsNeeded ,baconNeeded); //return boolean, num arg, 
+say(ingredientsReady);
+
+var cookSettings = oven.getCookSettings();
+if(oven.working === true){
+	say("We'll cook the bacon in the oven.")
+}else{
+	say("We'll cook the bacon on the stove.")
+}
 
 
+//meaghan.fillBelly();
 say(meaghan);
 say(omar);
 say(andisheh);
