@@ -219,6 +219,7 @@ if(oven.working === true){
 	say("We'll cook the bacon on the stove.")
 };
 
+say("Let's eat!");
 
 //say(meaghan);
 //say(omar);
