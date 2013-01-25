@@ -4,6 +4,24 @@
 //Project3
 //Project 2 expanded  
 
+//JSON DATA
+
+var json = {
+	"foods": {
+		"eggs": {
+			"cooktime": 5,
+			"cooktimeunits": "minutes",
+			"calories": 50,
+			"calorieunits": "per egg"
+		},
+		"bacon":{
+			"cooktime": 10,
+			"cooktimeunits": "minutes",
+			"calories": 100,
+			"calorieunits": "per egg"
+		},
+	},
+}
 
 //Global Variables
 
@@ -35,17 +53,19 @@ var familyMember = function(name){
 			this.foodInMouth += 1
 		},
 		chewSwallow: function(){
-			this.foodInMouth -= 1
-			this.foodInBelly += 1
+			//this.foodInMouth -= 1
+			this.foodInBelly += 1;
 		},
 		fillBelly: function(){
-			var i = this.eggs + this.bacon ;
+			var i = this.eggs + this.bacon;
 			var i2 = this.foodInMouth;
 			while(i > 0){
+				this.bite();
 				this.bite();
 				while(i2 > 0){
 					this.chewSwallow();
 					say("chew");
+					i2--;
 				}
 				i--;
 			}
@@ -66,6 +86,18 @@ var oven = {
 		ovenInfo.push = this.knob.settings;
 		return ovenInfo;
 	},
+};
+
+var seatNumChecker = function(numberOfSeats, seatsTaken){
+	var seatsAvailable;
+
+	if(numberOfSeats > seatsTaken){
+		seatsAvailable = numberOfSeats - seatsTaken;
+	}else{
+		seatsAvailable = 0;
+	}
+
+	return seatsAvailable;
 };
 
 var famReady = function(famEating){
@@ -164,9 +196,9 @@ say("Good Morning! Is everyone awake and ready for breakfast?")//string arg
 
 var famstatus = famReady(familyEating); //array arg, boolean return, conditional, local var
 readyRollCall(famstatus); //boolean argument, conditional, for loop (nested?)
+var seatsAvailable = seatNumChecker(6,3);
 
-
-
+say("There are " + seatsAvailable + " seats available at the table if anyone else joins us.");
 say("Let's take everyone's order"); //string arg
 
 takeOrder(); //for loop, nested conditional?,
@@ -179,19 +211,15 @@ var ingredientsReady = ingredientsNeeded(12 ,20 ,eggsNeeded ,baconNeeded); //ret
 say(ingredientsReady);
 
 var cookSettings = oven.getCookSettings();
+
 if(oven.working === true){
-	say("We'll cook the bacon in the oven.")
+	say("We'll cook the bacon in the oven for " + json.foods["bacon"].cooktime + " " + json.foods["bacon"].cooktimeunits);
+	//referense JSON data here
 }else{
 	say("We'll cook the bacon on the stove.")
-}
+};
 
 
-//meaghan.fillBelly();
-say(meaghan);
-say(omar);
-say(andisheh);
-
-
-
-//JSON
-// Use Eggs, Bacon, OJ and Coffee  with package info (cook time, nutrional info )
+//say(meaghan);
+//say(omar);
+//say(andisheh);
